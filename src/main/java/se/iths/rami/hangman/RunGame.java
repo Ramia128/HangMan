@@ -13,5 +13,10 @@ public class RunGame {
             String guess = IO.readln("Gissa Bokstav: ");
             IO.println(game.guess(guess) + "\n");
         } while (!game.gameOver());
+        if (game.gameOver() && game.tries() == 0) {
+            IO.println("Game Over! no more tries left.");
+        } else {
+            IO.println(game.win());
+        }
     }
 }

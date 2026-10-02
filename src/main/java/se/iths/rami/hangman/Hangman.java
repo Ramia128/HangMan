@@ -43,6 +43,10 @@ public class Hangman implements GameInterface {
             }
         }
 
+        if (!result.contains("_")) {
+            gameOver = true;
+        }
+
         if (tries == 0) {
             gameOver = true;
         }
@@ -61,6 +65,10 @@ public class Hangman implements GameInterface {
             throw new IllegalArgumentException("Gissningen får inte vara mer än en bokstav");
         }
         return guess;
+    }
+
+    public String win() {
+        return "Winner! the secret word was: " + secretWord;
     }
 
     public int tries() {
