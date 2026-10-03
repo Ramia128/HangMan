@@ -55,14 +55,11 @@ public class Hangman implements GameInterface {
     }
 
     private String guessChecker(String guess) {
-        if (guess == null) {
-            throw new IllegalArgumentException("Det får inte vara null");
-        }
         if (guess.isEmpty()) {
             throw new IllegalArgumentException("Gissningen får inte vara tom");
         }
-        if (guess.length() > 1) {
-            throw new IllegalArgumentException("Gissningen får inte vara mer än en bokstav");
+        if (!guess.matches("[a-zA-ZåäöÅÄÖ]")) {
+            throw new IllegalArgumentException("Gissningen måste vara endast en bokstav");
         }
         return guess;
     }
