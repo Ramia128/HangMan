@@ -8,8 +8,9 @@ public class RunGame {
     }
 
     public void run() {
+        IO.println(game.gameInfo());
         do {
-            IO.println("Lives left: " + game.tries());
+            IO.println("Antal försök kvar: " + game.tries());
             String guess = IO.readln("Gissa Bokstav: ");
             try {
                 IO.println(game.guess(guess) + "\n");
@@ -18,7 +19,7 @@ public class RunGame {
             }
         } while (!game.gameOver());
         if (game.gameOver() && game.tries() == 0) {
-            IO.println("Game Over! no more tries left.");
+            IO.println(game.lose());
         } else {
             IO.println(game.win());
         }

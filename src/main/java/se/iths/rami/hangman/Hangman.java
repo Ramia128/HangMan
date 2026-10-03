@@ -16,7 +16,8 @@ public class Hangman implements GameInterface {
 
     @Override
     public String gameInfo() {
-        return "";
+        return "\nGissa det hemliga ordet en bokstav i taget. Du har 6 försök.\n" +
+                "Det hemliga ordet har " + secretWord.length() + " bokstäver.\n";
     }
 
     @Override
@@ -43,11 +44,7 @@ public class Hangman implements GameInterface {
             }
         }
 
-        if (!result.contains("_")) {
-            gameOver = true;
-        }
-
-        if (tries == 0) {
+        if (tries == 0 || !result.contains("_")) {
             gameOver = true;
         }
 
@@ -55,7 +52,7 @@ public class Hangman implements GameInterface {
     }
 
     private String guessChecker(String guess) {
-        if (guess.isEmpty()) {
+        if (guess == null || guess.isEmpty()) {
             throw new IllegalArgumentException("Gissningen får inte vara tom");
         }
         if (!guess.matches("[a-zA-ZåäöÅÄÖ]")) {
@@ -64,10 +61,17 @@ public class Hangman implements GameInterface {
         return guess;
     }
 
+    @Override
     public String win() {
-        return "Winner! the secret word was: " + secretWord;
+        return "Vinnare! Du gissade rätt: " + secretWord;
     }
 
+    @Override
+    public String lose() {
+        return "Game Over! du har inga fler försök kvar.\n" + "Hemliga ordet är: " + secretWord;
+    }
+
+    @Override
     public int tries() {
         return tries;
     }
@@ -75,5 +79,10 @@ public class Hangman implements GameInterface {
     @Override
     public boolean gameOver() {
         return gameOver;
+    }
+
+
+    void setTries(int tries) {
+        this.tries = tries;
     }
 }
