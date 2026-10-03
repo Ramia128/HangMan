@@ -62,6 +62,16 @@ public class Hangman implements GameInterface {
     }
 
     @Override
+    public String inputPrompt() {
+        return "Gissa Bokstav: ";
+    }
+
+    @Override
+    public String triesInfo() {
+        return "Antal försök kvar: " + tries() + "\n";
+    }
+
+    @Override
     public String win() {
         return "Vinnare! Du gissade rätt: " + secretWord;
     }
@@ -71,7 +81,6 @@ public class Hangman implements GameInterface {
         return "Game Over! du har inga fler försök kvar.\n" + "Hemliga ordet är: " + secretWord;
     }
 
-    @Override
     public int tries() {
         return tries;
     }

@@ -7,9 +7,13 @@ public interface GameInterface {
 
     String win();
 
-    int tries();
+    String inputPrompt();
+
+    String triesInfo();
 
     String guess(String guess);
+
+    int tries();
 
     boolean gameOver();
 }

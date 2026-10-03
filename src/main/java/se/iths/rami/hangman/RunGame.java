@@ -10,8 +10,8 @@ public class RunGame {
     public void run() {
         IO.println(game.gameInfo());
         do {
-            IO.println("Antal försök kvar: " + game.tries());
-            String guess = IO.readln("Gissa Bokstav: ");
+            IO.println(game.triesInfo());
+            String guess = IO.readln(game.inputPrompt());
             try {
                 IO.println(game.guess(guess) + "\n");
             } catch (IllegalArgumentException e) {
