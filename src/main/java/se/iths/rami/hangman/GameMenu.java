@@ -10,7 +10,8 @@ public class GameMenu {
                     Choose a game you want to play or exit.
                     
                     1. Hangman
-                    2. Exit
+                    2. Higher or Lower
+                    3. Exit
                     """);
 
             String menuChoice = IO.readln("Enter your choice: ");
@@ -20,7 +21,12 @@ public class GameMenu {
                     RunGame runGame = new RunGame(game);
                     runGame.run();
                 }
-                case "2" -> menuRun = false;
+                case "2" -> {
+                    GameInterface game = new HigherOrLower();
+                    RunGame runGame = new RunGame(game);
+                    runGame.run();
+                }
+                case "3" -> menuRun = false;
 
                 default -> IO.println("Invalid choice.");
             }
