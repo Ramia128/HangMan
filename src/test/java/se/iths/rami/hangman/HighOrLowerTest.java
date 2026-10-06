@@ -96,6 +96,12 @@ public class HighOrLowerTest {
         assertEquals(2, hol.tries());
     }
 
+    @Test
+    @DisplayName("guess throws exception when null")
+    void guessNull() {
+        assertThrows(IllegalArgumentException.class, () -> hol.guess(null));
+    }
+
     @ParameterizedTest
     @ValueSource(strings = {"3", "0", "4", "!", " ", "aa"})
     @DisplayName("guess throws exception on wrong input")
