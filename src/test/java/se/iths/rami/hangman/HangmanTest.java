@@ -3,6 +3,8 @@ package se.iths.rami.hangman;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -39,6 +41,34 @@ public class HangmanTest {
     }
 
     @Test
+    @DisplayName("result equals the right placement of character")
+    void resultCorrectPlacement() {
+        hangman.setSecretWord("katastrofal");
+        assertEquals("_a_a_____a_", hangman.guess("a"));
+    }
+
+    @Test
+    @DisplayName("gameOver set to true if correct guessed word")
+    void gameOverTrueWhenCorrectWord() {
+        hangman.setSecretWord("Orangutang");
+        String[] guessWord = {"o", "r", "a", "N", "G", "u", "t"};
+
+        for (String guess : guessWord) {
+            hangman.guess(guess);
+        }
+
+        assertTrue(hangman.gameOver());
+    }
+
+    @Test
+    @DisplayName("guess() doesnt consume try on right letter")
+    void guessRightLetter() {
+        hangman.setSecretWord("kanel");
+        hangman.guess("k");
+        assertEquals(6, hangman.tries());
+    }
+
+    @Test
     @DisplayName("guess() consume tries when wrong guess")
     void guessWrongLetter() {
         hangman.guess("z");
@@ -65,14 +95,11 @@ public class HangmanTest {
         assertThrows(IllegalArgumentException.class, () -> hangman.guess(""));
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(strings = {" ", "1", "!", "aa", "abcd"})
     @DisplayName("guess() throws exception when not using only a single letter")
-    void guessInvalidInput() {
-        assertThrows(IllegalArgumentException.class, () -> hangman.guess(" "));
-        assertThrows(IllegalArgumentException.class, () -> hangman.guess("1"));
-        assertThrows(IllegalArgumentException.class, () -> hangman.guess("!"));
-        assertThrows(IllegalArgumentException.class, () -> hangman.guess("aa"));
-        assertThrows(IllegalArgumentException.class, () -> hangman.guess("abcd"));
+    void guessInvalidInput(String s) {
+        assertThrows(IllegalArgumentException.class, () -> hangman.guess(s));
     }
 
 }

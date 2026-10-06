@@ -4,7 +4,7 @@ import java.util.HashSet;
 
 public class Hangman implements GameInterface {
     private boolean gameOver = false;
-    private final String secretWord;
+    private String secretWord;
     private int tries = 6;
     private HashSet<Character> charHash = new HashSet<>();
 
@@ -24,7 +24,7 @@ public class Hangman implements GameInterface {
     public String guess(String guess) {
 
         String result = "";
-        char guessChar = guessChecker(guess).charAt(0);
+        char guessChar = guessChecker(guess.toLowerCase()).charAt(0);
         if (charHash.contains(guessChar)) {
             IO.println("Du har redan gissat den bokstaven");
         } else {
@@ -81,6 +81,7 @@ public class Hangman implements GameInterface {
         return "Game Over! du har inga fler försök kvar.\n" + "Hemliga ordet är: " + secretWord;
     }
 
+    @Override
     public int tries() {
         return tries;
     }
@@ -90,8 +91,11 @@ public class Hangman implements GameInterface {
         return gameOver;
     }
 
-
     void setTries(int tries) {
         this.tries = tries;
+    }
+
+    void setSecretWord(String word) {
+        this.secretWord = word;
     }
 }

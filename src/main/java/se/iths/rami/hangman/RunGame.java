@@ -18,7 +18,7 @@ public class RunGame {
                 IO.println(e.getMessage());
             }
         } while (!game.gameOver());
-        if (game.gameOver() && game.tries() == 0) {
+        if (game.tries() == 0) {
             IO.println(game.lose());
         } else {
             IO.println(game.win());
