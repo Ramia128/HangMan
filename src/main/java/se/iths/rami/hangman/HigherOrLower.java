@@ -15,7 +15,7 @@ public class HigherOrLower implements GameInterface {
     @Override
     public String guess(String guess) {
 
-        if (guess == null || (!guess.equals("1") && !guess.equals("2"))) {
+        if (guess == null || !(guess.equals("1") || guess.equals("2"))) {
             throw new IllegalArgumentException("Input 1 or 2 only.");
         }
 

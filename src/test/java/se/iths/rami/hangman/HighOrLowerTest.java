@@ -16,6 +16,7 @@ public class HighOrLowerTest {
         hol = new HigherOrLower();
     }
 
+    // On Start
     @Test
     @DisplayName("tries is set to 3 at start")
     void triesStart() {
@@ -34,9 +35,10 @@ public class HighOrLowerTest {
         assertEquals(0, hol.getScore());
     }
 
+    //After Start
     @Test
-    @DisplayName("gameOver is True when tries == 0")
-    void gameOverTrue() {
+    @DisplayName("gameOver is True when tries == 0 after guessing high")
+    void gameOverHighTrue() {
         hol.setTries(1);
         hol.setRandomNumber(21);
         hol.guess("1");
@@ -44,8 +46,17 @@ public class HighOrLowerTest {
     }
 
     @Test
-    @DisplayName("adding 1 to score on correct")
-    void scoreUp() {
+    @DisplayName("gameOver is True when tries == 0 after guessing low")
+    void gameOverLowTrue() {
+        hol.setTries(1);
+        hol.setRandomNumber(0);
+        hol.guess("2");
+        assertTrue(hol.gameOver());
+    }
+
+    @Test
+    @DisplayName("adding to score when guessing correct on high")
+    void scoreUpHigh() {
         hol.setRandomNumber(0);
         hol.guess("1");
         assertEquals(1, hol.getScore());
@@ -54,6 +65,35 @@ public class HighOrLowerTest {
             hol.guess("1");
         }
         assertEquals(5, hol.getScore());
+    }
+
+    @Test
+    @DisplayName("adding to score when guessing correct on low")
+    void scoreUpLow() {
+        hol.setRandomNumber(21);
+        hol.guess("2");
+        assertEquals(1, hol.getScore());
+        for (int i = 0; i < 4; i++) {
+            hol.setRandomNumber(21);
+            hol.guess("2");
+        }
+        assertEquals(5, hol.getScore());
+    }
+
+    @Test
+    @DisplayName("Correct guess doesnt lower tries")
+    void rightGuessTries() {
+        hol.setRandomNumber(21);
+        hol.guess("2");
+        assertEquals(3, hol.tries());
+    }
+
+    @Test
+    @DisplayName("Wrong guess lower tries")
+    void wrongGuessTries() {
+        hol.setRandomNumber(0);
+        hol.guess("2");
+        assertEquals(2, hol.tries());
     }
 
     @ParameterizedTest
