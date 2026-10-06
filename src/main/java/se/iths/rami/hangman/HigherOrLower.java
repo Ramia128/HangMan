@@ -14,6 +14,11 @@ public class HigherOrLower implements GameInterface {
 
     @Override
     public String guess(String guess) {
+
+        if (guess == null || (!guess.equals("1") && !guess.equals("2"))) {
+            throw new IllegalArgumentException("Input 1 or 2 only.");
+        }
+
         int num = randomNumber;
         randomGen();
 
@@ -25,7 +30,7 @@ public class HigherOrLower implements GameInterface {
                 tries--;
                 IO.println("Wrong!");
             }
-        } else if (guess.equals("2")) {
+        } else {
             if (randomNumber < num) {
                 score++;
                 IO.println(win());
@@ -33,8 +38,6 @@ public class HigherOrLower implements GameInterface {
                 tries--;
                 IO.println("Wrong!");
             }
-        } else {
-            throw new IllegalArgumentException("Input 1 or 2 only.");
         }
 
 
@@ -79,5 +82,17 @@ public class HigherOrLower implements GameInterface {
     @Override
     public boolean gameOver() {
         return gameOver;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    void setTries(int tries) {
+        this.tries = tries;
+    }
+
+    void setRandomNumber(int num) {
+        this.randomNumber = num;
     }
 }
